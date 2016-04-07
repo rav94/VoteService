@@ -22,27 +22,27 @@ namespace VoteService
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "create", ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        bool CreatePoll(Poll poll);
+        bool CreatePoll(PollEntity poll);
 
         [OperationContract]
         [WebInvoke(Method = "PUT", UriTemplate = "edit", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        bool UpdatePoll(Poll poll);
+        bool UpdatePoll(PollEntity poll);
 
         [OperationContract]
         [WebInvoke(Method = "DELETE", UriTemplate = "delete", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        bool DeletePoll(Poll poll);
+        bool DeletePoll(PollEntity poll);
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "findPoll", ResponseFormat = WebMessageFormat.Json)]
-        List<Poll> FindAllPoll();
+        List<PollEntity> FindAllPoll();
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "findPoll/{id}", ResponseFormat = WebMessageFormat.Json)]
-        Poll FindPollById(string id);
+        PollEntity FindPollById(string id);
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "pollMaxId", ResponseFormat = WebMessageFormat.Json)]
-        Poll GetMaxPollID();
+        PollEntity GetMaxPollID();
     }
     #endregion
 
@@ -53,23 +53,23 @@ namespace VoteService
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "create", ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        bool CreateQuestion(Question question);
+        bool CreateQuestion(QuestionEntity question);
 
         [OperationContract]
         [WebInvoke(Method = "PUT", UriTemplate = "edit", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        bool UpdateQuestion(Question question);
+        bool UpdateQuestion(QuestionEntity question);
 
         [OperationContract]
         [WebInvoke(Method = "DELETE", UriTemplate = "delete", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        bool DeleteQuestion(Question question);
+        bool DeleteQuestion(QuestionEntity question);
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "findQuestion", ResponseFormat = WebMessageFormat.Json)]
-        List<Question> FindAllQuestion();
+        List<QuestionEntity> FindAllQuestion();
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "findQuestion/{id}", ResponseFormat = WebMessageFormat.Json)]
-        Question FindQuestionById(string id);
+        QuestionEntity FindQuestionById(string id);
     }
     #endregion
 
@@ -80,23 +80,23 @@ namespace VoteService
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "create", ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        bool CreateAnswer(Answer answer);
+        bool CreateAnswer(AnswerEntity answer);
 
         [OperationContract]
         [WebInvoke(Method = "PUT", UriTemplate = "edit", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        bool UpdateAnswer(Answer answer);
+        bool UpdateAnswer(AnswerEntity answer);
 
         [OperationContract]
         [WebInvoke(Method = "DELETE", UriTemplate = "delete", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        bool DeleteAnswer(Answer answer);
+        bool DeleteAnswer(AnswerEntity answer);
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "findAnswer", ResponseFormat = WebMessageFormat.Json)]
-        List<Answer> FindAllAnswer();
+        List<AnswerEntity> FindAllAnswer();
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "findAnswer/{id}", ResponseFormat = WebMessageFormat.Json)]
-        Answer FindAnswerById(string id);
+        AnswerEntity FindAnswerById(string id);
     }
     #endregion
 
@@ -107,23 +107,23 @@ namespace VoteService
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "create", ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        bool CreateUser(User user);
+        bool CreateUser(UserEntity user);
 
         [OperationContract]
         [WebInvoke(Method = "PUT", UriTemplate = "edit", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        bool UpdateUser(User user);
+        bool UpdateUser(UserEntity user);
 
         [OperationContract]
         [WebInvoke(Method = "DELETE", UriTemplate = "delete", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        bool DeleteUser(User user);
+        bool DeleteUser(UserEntity user);
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "findUser", ResponseFormat = WebMessageFormat.Json)]
-        List<User> FindAllUser();
+        List<UserEntity> FindAllUser();
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "findUser/{id}", ResponseFormat = WebMessageFormat.Json)]
-        User FindUserById(string id);
+        UserEntity FindUserById(string id);
     }
     #endregion
 }
