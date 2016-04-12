@@ -5,10 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a30a0fc6ff1440db9c3cc4086469d77b" Name="Diagram1">
-        <EntityTypeShape EntityType="EVoteModel.PollEntity" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EVoteModel.AnswerEntity" Width="1.5" PointX="4.375" PointY="1" />
-        <EntityTypeShape EntityType="EVoteModel.QuestionEntity" Width="1.5" PointX="2.5" PointY="0.875" />
-        <EntityTypeShape EntityType="EVoteModel.UserEntity" Width="1.5" PointX="6.125" PointY="0.75" />
+        <EntityTypeShape EntityType="EVoteModel.AnswerEntity" Width="1.5" PointX="2.75" PointY="0.875" />
+        <EntityTypeShape EntityType="EVoteModel.UserEntity" Width="1.5" PointX="4.875" PointY="0.875" />
+        <EntityTypeShape EntityType="EVoteModel.PollEntity" Width="1.5" PointX="0.625" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

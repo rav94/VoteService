@@ -43,33 +43,15 @@ namespace VoteService
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "pollMaxId", ResponseFormat = WebMessageFormat.Json)]
         PollEntity GetMaxPollID();
-    }
-    #endregion
-
-    #region Question
-    [ServiceContract]
-    public interface IQuestionServices
-    {
-        [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "create", ResponseFormat = WebMessageFormat.Json,
-            RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        bool CreateQuestion(QuestionEntity question);
 
         [OperationContract]
-        [WebInvoke(Method = "PUT", UriTemplate = "edit", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        bool UpdateQuestion(QuestionEntity question);
+        [WebInvoke(Method = "GET", UriTemplate = "getPollByUser/{id}", ResponseFormat = WebMessageFormat.Json)]
+        List<PollEntity> GetPollByUserId(string id);
 
         [OperationContract]
-        [WebInvoke(Method = "DELETE", UriTemplate = "delete", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        bool DeleteQuestion(QuestionEntity question);
+        [WebInvoke(Method = "GET", UriTemplate = "getAnswerByPoll/{id}", ResponseFormat = WebMessageFormat.Json)]
+        List<Poll> GetAnswerByPoll(string id);
 
-        [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "findQuestion", ResponseFormat = WebMessageFormat.Json)]
-        List<QuestionEntity> FindAllQuestion();
-
-        [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "findQuestion/{id}", ResponseFormat = WebMessageFormat.Json)]
-        QuestionEntity FindQuestionById(string id);
     }
     #endregion
 
@@ -127,3 +109,31 @@ namespace VoteService
     }
     #endregion
 }
+
+
+//#region Question
+//[ServiceContract]
+//public interface IQuestionServices
+//{
+//    [OperationContract]
+//    [WebInvoke(Method = "POST", UriTemplate = "create", ResponseFormat = WebMessageFormat.Json,
+//        RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+//    bool CreateQuestion(QuestionEntity question);
+
+//    [OperationContract]
+//    [WebInvoke(Method = "PUT", UriTemplate = "edit", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+//    bool UpdateQuestion(QuestionEntity question);
+
+//    [OperationContract]
+//    [WebInvoke(Method = "DELETE", UriTemplate = "delete", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+//    bool DeleteQuestion(QuestionEntity question);
+
+//    [OperationContract]
+//    [WebInvoke(Method = "GET", UriTemplate = "findQuestion", ResponseFormat = WebMessageFormat.Json)]
+//    List<QuestionEntity> FindAllQuestion();
+
+//    [OperationContract]
+//    [WebInvoke(Method = "GET", UriTemplate = "findQuestion/{id}", ResponseFormat = WebMessageFormat.Json)]
+//    QuestionEntity FindQuestionById(string id);
+//}
+//#endregion

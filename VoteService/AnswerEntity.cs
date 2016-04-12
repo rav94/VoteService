@@ -15,7 +15,7 @@ namespace VoteService
     public partial class AnswerEntity
     {
         public int AnswerId { get; set; }
-        public Nullable<int> QuestionId { get; set; }
         public string Title { get; set; }
+        public Nullable<int> PollId { get; set; }
     }
 }

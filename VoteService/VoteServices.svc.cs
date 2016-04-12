@@ -9,7 +9,7 @@ namespace VoteService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "VoteServices" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select VoteServices.svc or VoteServices.svc.cs at the Solution Explorer and start debugging.
-    public class VoteServices : IVoteServices, IPollServices,IQuestionServices, IAnswerServices, IUserServices
+    public class VoteServices : IVoteServices, IPollServices, IAnswerServices, IUserServices
     {
 
         #region PollService
@@ -66,8 +66,13 @@ namespace VoteService
                   
                     var query = (from details in entity.PollEntities
                                      where details.Id == poll.Id &&
-                                     details.Title == poll.Title
-                                     select details);
+                                     details.Title == poll.Title && 
+                                     details.UserId == poll.UserId &&
+                                     details.AnswerOne == poll.AnswerOne &&
+                                     details.AnswerTwo == poll.AnswerTwo &&
+                                     details.AnswerThree == poll.AnswerThree &&
+                                     details.AnswerFour == poll.AnswerFour
+                                 select details);
                 
                     if (query.Any())
                     {
@@ -133,119 +138,54 @@ namespace VoteService
         {
             throw new NotImplementedException();
         }
-        #endregion
 
-
-        #region QuestionService
-        public bool CreateQuestion(QuestionEntity question)
+        public List<PollEntity> GetPollByUserId(string id)
         {
+            List<UserEntity> user = new List<UserEntity>();
+            List<PollEntity> poll = new List<PollEntity>();
+            int nid = Convert.ToInt32(id);
             try
             {
                 using (EVoteEntities entity = new EVoteEntities())
                 {
-                    var query = (from info in entity.QuestionEntities
-                                 select info);
-
-                    entity.QuestionEntities.Add(question);
-                    entity.SaveChanges();
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        public bool UpdateQuestion(QuestionEntity question)
-        {
-            try
-            {
-                using (EVoteEntities entity = new EVoteEntities())
-                {
-                    var query = (from Info in entity.QuestionEntities
-                                 select Info);
-
-                    if (query.Any())
-                    {
-                        entity.QuestionEntities.Remove(query.First());
-                        entity.SaveChanges();
-
-                        entity.QuestionEntities.Add(question);
-                        entity.SaveChanges();
-                    }
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        public bool DeleteQuestion(QuestionEntity question)
-        {
-            try
-            {
-                using (EVoteEntities entity = new EVoteEntities())
-                {
-                    var query = (from details in entity.QuestionEntities
-                                 where details.QuestionId == question.QuestionId &&
-                                 details.PollId == question.PollId && details.Title == question.Title
-                                 select details);
-
-                    if (query.Any())
-                    {
-                        entity.QuestionEntities.Remove(query.First());
-                        entity.SaveChanges();
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        public List<QuestionEntity> FindAllQuestion()
-        {
-            try
-            {
-                List<QuestionEntity> question = new List<QuestionEntity>();
-                using (EVoteEntities entity = new EVoteEntities())
-                {
-                    var query = (from info in entity.QuestionEntities
+                    var query = (from info in entity.PollEntities
+                                 where info.UserId == nid
                                  select info);
 
                     if (query.Any())
-                        question = query.ToList();
-                };
-                return question;
+                        poll = query.ToList();
+                }
+                return poll;
             }
             catch (Exception)
             {
+
                 throw;
             }
         }
-        public QuestionEntity FindQuestionById(string id)
+
+        public List<Poll> GetAnswerByPoll(string id)
         {
             try
             {
-                QuestionEntity question = new QuestionEntity();
+                List<Poll> poll = new List<Poll>();
                 int nid = Convert.ToInt32(id);
                 using (EVoteEntities entity = new EVoteEntities())
                 {
-                    var query = (from info in entity.QuestionEntities
-                                 where info.QuestionId == nid
-                                 select info);
-
-                    if (query.Any())
-                        question = query.First();
+                    var query = (from info in entity.PollEntities
+                                 where info.Id == nid
+                                 select new Poll
+                                 {
+                                     AnswerOne = info.AnswerOne,
+                                     AnswerTwo = info.AnswerTwo,
+                                     AnswerThree = info.AnswerThree,
+                                     AnswerFour = info.AnswerFour
+                                 }).ToList();
+                     
+                    poll = query;
 
                 };
-                return question;
+                return poll;
             }
             catch (Exception)
             {
@@ -253,6 +193,15 @@ namespace VoteService
             }
         }
         #endregion
+
+
+
+
+
+
+
+
+
 
 
         #region AnswerService
@@ -308,7 +257,7 @@ namespace VoteService
                 {
                     var query = (from details in entity.AnswerEntities
                                  where details.AnswerId == answer.AnswerId &&
-                                 details.QuestionId == answer.QuestionId && details.Title == answer.Title
+                                 details.PollId == answer.PollId && details.Title == answer.Title
                                  select details);
 
                     if (query.Any())
@@ -491,7 +440,9 @@ namespace VoteService
                 throw;
             }
         }
+
         
+
         #endregion
     }
 }
@@ -528,3 +479,123 @@ namespace VoteService
 //pl.Title = poll.Title;
 //entity.SaveChanges();
 //return true;
+
+
+
+//#region QuestionService
+//public bool CreateQuestion(QuestionEntity question)
+//{
+//    try
+//    {
+//        using (EVoteEntities entity = new EVoteEntities())
+//        {
+//            var query = (from info in entity.QuestionEntities
+//                         select info);
+
+//            entity.QuestionEntities.Add(question);
+//            entity.SaveChanges();
+//        }
+//        return true;
+//    }
+//    catch (Exception)
+//    {
+//        throw;
+//    }
+//}
+//public bool UpdateQuestion(QuestionEntity question)
+//{
+//    try
+//    {
+//        using (EVoteEntities entity = new EVoteEntities())
+//        {
+//            var query = (from Info in entity.QuestionEntities
+//                         select Info);
+
+//            if (query.Any())
+//            {
+//                entity.QuestionEntities.Remove(query.First());
+//                entity.SaveChanges();
+
+//                entity.QuestionEntities.Add(question);
+//                entity.SaveChanges();
+//            }
+//        }
+//        return true;
+//    }
+//    catch (Exception)
+//    {
+//        throw;
+//    }
+//}
+//public bool DeleteQuestion(QuestionEntity question)
+//{
+//    try
+//    {
+//        using (EVoteEntities entity = new EVoteEntities())
+//        {
+//            var query = (from details in entity.QuestionEntities
+//                         where details.QuestionId == question.QuestionId &&
+//                         details.PollId == question.PollId && details.Title == question.Title
+//                         select details);
+
+//            if (query.Any())
+//            {
+//                entity.QuestionEntities.Remove(query.First());
+//                entity.SaveChanges();
+//            }
+//            else
+//            {
+//                return false;
+//            }
+//            return true;
+//        }
+//    }
+//    catch (Exception)
+//    {
+//        throw;
+//    }
+//}
+//public List<QuestionEntity> FindAllQuestion()
+//{
+//    try
+//    {
+//        List<QuestionEntity> question = new List<QuestionEntity>();
+//        using (EVoteEntities entity = new EVoteEntities())
+//        {
+//            var query = (from info in entity.QuestionEntities
+//                         select info);
+
+//            if (query.Any())
+//                question = query.ToList();
+//        };
+//        return question;
+//    }
+//    catch (Exception)
+//    {
+//        throw;
+//    }
+//}
+//public QuestionEntity FindQuestionById(string id)
+//{
+//    try
+//    {
+//        QuestionEntity question = new QuestionEntity();
+//        int nid = Convert.ToInt32(id);
+//        using (EVoteEntities entity = new EVoteEntities())
+//        {
+//            var query = (from info in entity.QuestionEntities
+//                         where info.QuestionId == nid
+//                         select info);
+
+//            if (query.Any())
+//                question = query.First();
+
+//        };
+//        return question;
+//    }
+//    catch (Exception)
+//    {
+//        throw;
+//    }
+//}
+//#endregion

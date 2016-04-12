@@ -25,9 +25,8 @@ namespace VoteService
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<PollEntity> PollEntities { get; set; }
         public virtual DbSet<AnswerEntity> AnswerEntities { get; set; }
-        public virtual DbSet<QuestionEntity> QuestionEntities { get; set; }
         public virtual DbSet<UserEntity> UserEntities { get; set; }
+        public virtual DbSet<PollEntity> PollEntities { get; set; }
     }
 }
