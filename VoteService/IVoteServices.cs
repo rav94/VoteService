@@ -145,6 +145,10 @@ namespace VoteService
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "findStat/{id}", ResponseFormat = WebMessageFormat.Json)]
         StatEntity FindStatById(string Id);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "getStatByPoll/{id}", ResponseFormat = WebMessageFormat.Json)]
+        List<Stat> GetStatByPoll(string Id);
     }
     #endregion
 }

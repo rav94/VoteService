@@ -505,6 +505,35 @@ namespace VoteService
             }
         }
 
+        public List<Stat> GetStatByPoll(string Id)
+        {
+            try
+            {
+                List<Stat> stat = new List<Stat>();
+                int nid = Convert.ToInt32(Id);
+                using (EVoteEntities entity = new EVoteEntities())
+                {
+                    var query = (from info in entity.StatEntities
+                                 where info.PollId == nid
+                                 select new Stat
+                                 {
+                                     StatId = info.StatId,
+                                     AnswerOneId = info.AnswerOneId,
+                                     AnswerTwoId = info.AnswerTwoId,
+                                     AnswerThreeId = info.AnswerThreeId,
+                                     AnswerFourId = info.AnswerFourId,                                    
+                                 }).ToList();
+
+                    stat = query;
+
+                };
+                return stat;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
     }
 }
