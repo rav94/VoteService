@@ -12,14 +12,13 @@ namespace VoteService
     using System;
     using System.Collections.Generic;
     
-    public partial class PollEntity
+    public partial class StatEntity
     {
-        public int Id { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public string Title { get; set; }
-        public string AnswerOne { get; set; }
-        public string AnswerTwo { get; set; }
-        public string AnswerThree { get; set; }
-        public string AnswerFour { get; set; }
+        public int StatId { get; set; }
+        public Nullable<int> PollId { get; set; }
+        public Nullable<int> AnswerOneId { get; set; }
+        public Nullable<int> AnswerTwoId { get; set; }
+        public Nullable<int> AnswerThreeId { get; set; }
+        public Nullable<int> AnswerFourId { get; set; }
     }
 }

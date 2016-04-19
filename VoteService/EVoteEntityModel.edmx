@@ -25,6 +25,17 @@
           <Property Name="AnswerThree" Type="varchar" MaxLength="50" />
           <Property Name="AnswerFour" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="stats">
+          <Key>
+            <PropertyRef Name="StatId" />
+          </Key>
+          <Property Name="StatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PollId" Type="int" />
+          <Property Name="AnswerOneId" Type="int" />
+          <Property Name="AnswerTwoId" Type="int" />
+          <Property Name="AnswerThreeId" Type="int" />
+          <Property Name="AnswerFourId" Type="int" />
+        </EntityType>
         <EntityType Name="users">
           <Key>
             <PropertyRef Name="UserId" />
@@ -37,6 +48,7 @@
         <EntityContainer Name="EVoteModelStoreContainer">
           <EntitySet Name="answers" EntityType="Self.answers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="polls" EntityType="Self.polls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="stats" EntityType="Self.stats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -47,6 +59,7 @@
           <EntitySet Name="AnswerEntities" EntityType="EVoteModel.AnswerEntity" />
           <EntitySet Name="UserEntities" EntityType="EVoteModel.UserEntity" />
           <EntitySet Name="PollEntities" EntityType="EVoteModel.PollEntity" />
+          <EntitySet Name="StatEntities" EntityType="EVoteModel.StatEntity" />
         </EntityContainer>
         <EntityType Name="AnswerEntity">
           <Key>
@@ -76,6 +89,17 @@
           <Property Name="AnswerTwo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AnswerThree" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AnswerFour" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="StatEntity">
+          <Key>
+            <PropertyRef Name="StatId" />
+          </Key>
+          <Property Name="StatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PollId" Type="Int32" />
+          <Property Name="AnswerOneId" Type="Int32" />
+          <Property Name="AnswerTwoId" Type="Int32" />
+          <Property Name="AnswerThreeId" Type="Int32" />
+          <Property Name="AnswerFourId" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -112,6 +136,18 @@
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatEntities">
+            <EntityTypeMapping TypeName="EVoteModel.StatEntity">
+              <MappingFragment StoreEntitySet="stats">
+                <ScalarProperty Name="AnswerFourId" ColumnName="AnswerFourId" />
+                <ScalarProperty Name="AnswerThreeId" ColumnName="AnswerThreeId" />
+                <ScalarProperty Name="AnswerTwoId" ColumnName="AnswerTwoId" />
+                <ScalarProperty Name="AnswerOneId" ColumnName="AnswerOneId" />
+                <ScalarProperty Name="PollId" ColumnName="PollId" />
+                <ScalarProperty Name="StatId" ColumnName="StatId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

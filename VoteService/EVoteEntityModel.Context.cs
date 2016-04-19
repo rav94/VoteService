@@ -28,5 +28,6 @@ namespace VoteService
         public virtual DbSet<AnswerEntity> AnswerEntities { get; set; }
         public virtual DbSet<UserEntity> UserEntities { get; set; }
         public virtual DbSet<PollEntity> PollEntities { get; set; }
+        public virtual DbSet<StatEntity> StatEntities { get; set; }
     }
 }

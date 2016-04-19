@@ -9,7 +9,7 @@ namespace VoteService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "VoteServices" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select VoteServices.svc or VoteServices.svc.cs at the Solution Explorer and start debugging.
-    public class VoteServices : IVoteServices, IPollServices, IAnswerServices, IUserServices
+    public class VoteServices : IVoteServices, IPollServices, IAnswerServices, IUserServices, IStatServices
     {
 
         #region PollService
@@ -179,7 +179,8 @@ namespace VoteService
                                      AnswerOne = info.AnswerOne,
                                      AnswerTwo = info.AnswerTwo,
                                      AnswerThree = info.AnswerThree,
-                                     AnswerFour = info.AnswerFour
+                                     AnswerFour = info.AnswerFour,
+                                     Id = info.Id
                                  }).ToList();
                      
                     poll = query;
@@ -193,16 +194,6 @@ namespace VoteService
             }
         }
         #endregion
-
-
-
-
-
-
-
-
-
-
 
         #region AnswerService
         public bool CreateAnswer(AnswerEntity answer)
@@ -441,7 +432,78 @@ namespace VoteService
             }
         }
 
-        
+        #endregion
+
+
+        #region Stats
+
+        //Statistic Creation
+        public bool CreateStat(StatEntity stat)
+        {
+            try
+            {
+                using (EVoteEntities entity = new EVoteEntities())
+                {
+                    var query = (from info in entity.StatEntities
+                                 select info);
+
+                    entity.StatEntities.Add(stat);
+                    entity.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //Finding All Statistics 
+        public List<StatEntity> FindAllStat()
+        {
+            try
+            {
+                List<StatEntity> stat = new List<StatEntity>();
+                using (EVoteEntities entity = new EVoteEntities())
+                {
+                    var query = (from info in entity.StatEntities
+                                 select info);
+
+                    if (query.Any())
+                        stat = query.ToList();
+                };
+                return stat;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //Finding Statistics based on Id
+        public StatEntity FindStatById(string Id)
+        {
+            try
+            {
+                StatEntity stat = new StatEntity();
+                int nid = Convert.ToInt32(Id);
+                using (EVoteEntities entity = new EVoteEntities())
+                {
+                    var query = (from info in entity.StatEntities
+                                 where info.StatId == nid
+                                 select info);
+
+                    if (query.Any())
+                        stat = query.First();
+
+                };
+                return stat;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #endregion
     }
